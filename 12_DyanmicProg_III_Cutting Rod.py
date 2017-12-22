@@ -23,7 +23,7 @@ def cutRod2(price,length, n):
 
     return K
 
-
+### better version
 def cutrod(price,rlen):
     mat = [[0 for x in range(rlen+1)] for y in range(rlen+1)]
     for p in range(1,rlen+1):
