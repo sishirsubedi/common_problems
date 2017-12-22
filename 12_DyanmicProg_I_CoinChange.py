@@ -5,11 +5,9 @@ Created on Fri May 27 08:40:49 2016
 @author: ibm-lenovo
 """
 
-# dynamic program - coin change 
+# dynamic program - coin change
 
-# this is fatal because of lack of dynamic programming..there is dublicate in calculation
-
-def findnumofchange(change,n):
+def findnumofchange2(change,n):
     K = [[0 for x in range(n+1)] for x in range(len(change)+1)]
 
     for i in range(1,(len(change)+1)):  # 1 to 5
@@ -30,9 +28,26 @@ def findnumofchange(change,n):
     return K
 
 
+def findnumofchange(change,n):
+    mat = [[0 for x in range(n+1)] for x in range(len(change)+1)]
+
+    for c in range(1,(len(change)+1)):
+        for m in range(1, n + 1):
+            if change[c-1] ==m :
+                mat[c][m] = 1
+            elif m>change[c-1] and change[c-1]==1:
+                mat[c][m] = 1 + mat[c][m - change[c - 1]]
+
+            elif m>change[c-1] and change[c-1]!=1:
+                mat[c][m] = min(mat[c-1][m],1+ mat[c][m-change[c-1]])
+
+            elif m<change[c-1]:
+                mat[c][m] = mat[c-1][m]
+
+    return mat
 
 
-mat = (findnumofchange([1,5,10],16))
+mat = (findnumofchange([1,5,10,25],42))
 for i in mat:
     print i
 
@@ -55,5 +70,5 @@ def recDC(coinValueList,change,knownResults):
             #print change, knownResults
    return minCoins
 
-print 'minimum coins : ' , (recDC([1,5,10,25],45,[0]*64))
+print 'minimum coins : ' , (recDC([1,6,10],45,[0]*64))
 
