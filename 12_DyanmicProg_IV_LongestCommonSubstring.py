@@ -24,7 +24,23 @@ def maxCommonSubstring(str1,str2):
                 K[i][j] = max(K[i-1][j],K[i][j-1])
 
     return common#K
- 
+
+
+def maxCommonSubstring2(word,pattern):
+    len1 = len(word)
+    len2 = len(pattern)
+    mat = [[0 for x in range(len1 + 1)] for y in range(len2 + 1)]
+    for p in range(1,len2 + 1):
+        for w in range(1,len1+1):
+            if word[w-1]==pattern[p-1]:
+                mat[p][w] = mat[p-1][w-1] + 1
+            else:
+                mat[p][w] = max(mat[p-1][w] ,mat[p-1][w])
+    return mat
+
+
+
+
 # Driver program to test above functions
 string1 = ['a','b','c','d','e','f']
 string2 =['a','c','b','c','f']
@@ -33,3 +49,19 @@ string2 =['a','c','b','c','f']
 #print(string1, string2, "Common max sequence is "  + str(maxCommonSubstring(string1,string2) ))
 
 print str(maxCommonSubstring(string1,string2))
+
+pattern = ['b','c','d']
+word =['a','b','c','d','e']
+
+mat = maxCommonSubstring2(word,pattern)
+
+for i in mat:
+    print i
+
+X = "zxabcdezy"
+y = "yzabcdezx"
+
+mat = maxCommonSubstring2(X, y)
+
+for i in mat:
+    print i

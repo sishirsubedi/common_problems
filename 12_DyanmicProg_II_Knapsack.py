@@ -1,29 +1,17 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Jun 02 21:47:12 2016
-
-@author: ibm-lenovo
-"""
 
 # A Dynamic Programming based Python Program for 0-1 Knapsack problem
 # Returns the maximum value that can be put in a knapsack of capacity W
 def knapSack(W, wt, val, n):
-    K = [[0 for x in range(W+1)] for x in range(n+1)]
- 
-    # Build table K[][] in bottom up manner
+    mat = [[0 for x in range(W+1)] for x in range(n+1)]
     for i in range(n+1):
         for w in range(W+1):
-           
             if i==0 or w==0:
-                K[i][w] = 0
+                mat[i][w] = 0
             elif wt[i-1] <= w:
-                K[i][w] = max(val[i-1] + K[i-1][w-wt[i-1]],  K[i-1][w])
+                mat[i][w] = max(val[i-1] + mat[i-1][w-wt[i-1]],  mat[i-1][w])
             else:
-                K[i][w] = K[i-1][w]
-                
-                
-                
-    return K
+                mat[i][w] = mat[i-1][w]
+    return mat
 
 
 def knapsack_rec(W,wt, val, n,arr):
@@ -36,7 +24,7 @@ def knapsack_rec(W,wt, val, n,arr):
     return result
 
 
-# Driver program to test above function
+# test
 val = [12, 10, 6]
 wt = [1, 2, 3]
 W = 5

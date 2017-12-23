@@ -118,9 +118,6 @@ string1 =['t','t','a','a','g']
 score = ScoreParam(-7,10,-5)
 
 
-
-
-
 mat = local_align(string2,string1,score)
 mat2 = local_backtrack(string2,string1,mat)
 for i in mat:
