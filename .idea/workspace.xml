@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4e5d7744-f73d-404e-949d-55a84a90ea9a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/12_DyanmicProg_IV_LongestCommonSubstring.py" afterPath="$PROJECT_DIR$/12_DyanmicProg_IV_LongestCommonSubstring.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -288,7 +287,14 @@
       <option name="project" value="LOCAL" />
       <updated>1514009241510</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="&quot;added edits&quot;">
+      <created>1514321218252</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1514321218252</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
