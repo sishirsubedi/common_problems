@@ -35,7 +35,7 @@ def maxCommonSubstring2(word,pattern):
             if word[w-1]==pattern[p-1]:
                 mat[p][w] = mat[p-1][w-1] + 1
             else:
-                mat[p][w] = max(mat[p-1][w] ,mat[p-1][w])
+                mat[p][w] = max(mat[p-1][w] ,mat[p][w-1])
     return mat
 
 
@@ -53,7 +53,7 @@ print str(maxCommonSubstring(string1,string2))
 pattern = ['b','c','d']
 word =['a','b','c','d','e']
 
-mat = maxCommonSubstring2(word,pattern)
+mat = maxCommonSubstring(word,pattern)
 
 for i in mat:
     print i
