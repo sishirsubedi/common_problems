@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4e5d7744-f73d-404e-949d-55a84a90ea9a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/11_PatternMatch.py" afterPath="$PROJECT_DIR$/11_PatternMatch.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,11 +14,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="11_PatternMatch.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/11_PatternMatch.py">
+      <file leaf-file-name="3_graph_1_intro.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/3_graph_1_intro.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="51" column="0" lean-forward="true" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+            <state relative-caret-position="-247">
+              <caret line="11" column="3" lean-forward="true" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -106,25 +105,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.11_PatternMatch">
-    <configuration default="false" name="12_DyanmicProg_subset_sum" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="common_problems" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/12_DyanmicProg_subset_sum.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.3_graph_1_intro">
     <configuration default="false" name="1_linkedlist_basic" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -197,6 +178,24 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <method />
     </configuration>
+    <configuration default="false" name="3_graph_1_intro" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="common_problems" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/3_graph_1_intro.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -263,19 +262,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.12_DyanmicProg_subset_sum" />
-      <item index="1" class="java.lang.String" itemvalue="Python.1_linkedlist_basic" />
-      <item index="2" class="java.lang.String" itemvalue="Python.1_linkedlist_2_sumnum" />
-      <item index="3" class="java.lang.String" itemvalue="Python.2_binarytree" />
-      <item index="4" class="java.lang.String" itemvalue="Python.11_PatternMatch" />
+      <item index="0" class="java.lang.String" itemvalue="Python.1_linkedlist_basic" />
+      <item index="1" class="java.lang.String" itemvalue="Python.1_linkedlist_2_sumnum" />
+      <item index="2" class="java.lang.String" itemvalue="Python.2_binarytree" />
+      <item index="3" class="java.lang.String" itemvalue="Python.11_PatternMatch" />
+      <item index="4" class="java.lang.String" itemvalue="Python.3_graph_1_intro" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.11_PatternMatch" />
-        <item index="1" class="java.lang.String" itemvalue="Python.2_binarytree" />
-        <item index="2" class="java.lang.String" itemvalue="Python.1_linkedlist_2_sumnum" />
-        <item index="3" class="java.lang.String" itemvalue="Python.1_linkedlist_basic" />
-        <item index="4" class="java.lang.String" itemvalue="Python.12_DyanmicProg_subset_sum" />
+        <item index="0" class="java.lang.String" itemvalue="Python.3_graph_1_intro" />
+        <item index="1" class="java.lang.String" itemvalue="Python.11_PatternMatch" />
+        <item index="2" class="java.lang.String" itemvalue="Python.2_binarytree" />
+        <item index="3" class="java.lang.String" itemvalue="Python.1_linkedlist_2_sumnum" />
+        <item index="4" class="java.lang.String" itemvalue="Python.1_linkedlist_basic" />
       </list>
     </recent_temporary>
   </component>
@@ -332,18 +331,26 @@
       <option name="project" value="LOCAL" />
       <updated>1514321361237</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="pattern match kmp update">
+      <created>1514398050280</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1514398050280</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="169" width="1602" height="912" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2718509" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.10102302" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33120206" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -366,7 +373,8 @@
     <MESSAGE value="&quot;removed comment&quot;" />
     <MESSAGE value="&quot;added edits&quot;" />
     <MESSAGE value="&quot;added more problems&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;added more problems&quot;" />
+    <MESSAGE value="pattern match kmp update" />
+    <option name="LAST_COMMIT_MESSAGE" value="pattern match kmp update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -616,18 +624,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/11_PatternMatch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="589">
+          <caret line="55" column="0" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/2_binarytree.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1011">
+        <state relative-caret-position="1159">
           <caret line="61" column="79" lean-forward="false" selection-start-line="61" selection-start-column="79" selection-end-line="61" selection-end-column="79" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/11_PatternMatch.py">
+    <entry file="file://$PROJECT_DIR$/3_graph_1_intro.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="51" column="0" lean-forward="true" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+        <state relative-caret-position="-247">
+          <caret line="11" column="3" lean-forward="true" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
           <folding />
         </state>
       </provider>
