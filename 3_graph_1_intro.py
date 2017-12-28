@@ -1,180 +1,117 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon May 23 14:32:20 2016
 
-@author: ibm-lenovo
-"""
-''' example of simple dictionary      
-mydict = {"red": 1, "yellow":2, "green" :3}
+import Queue
 
-print mydict["red"] # prints 1
 
-'''
+class node:
+    def __init__(self,_id):
+        self.id = _id
+        self.neighbors ={}
 
-class Queue:
-    def __init__(self):
-        self.items = []
+    def add_neighbor(self,nnode,weight=1):
+        self.neighbors[nnode]= weight
 
-    def isEmpty(self):
-        return self.items == []
-
-    def enqueue(self, item):
-        self.items.insert(0,item)
-
-    def dequeue(self):
-        return self.items.pop()
-
-    def size(self):
-        return len(self.items)
-        
-
-class Vertex:
-    def __init__(self, key):
-        self.id = key
-        self.connectedTo = {}
-        self.color = 'white'
-      
-    
-    def addNeighbor (self, nbr, weight =0):
-        self.connectedTo[nbr]=weight
-
-    def getConnections(self):
-        return self.connectedTo.keys()
-    
-    def getId(self):
+    def get_id(self):
         return self.id
-    
-    def getweight(self, nbr):
-        return self.connectedTo[nbr]
-    
-    def __str__(self):
-        return str(self.id) + ' connectedTo: ' + str([x.id for x in self.connectedTo])
-        
-    def setColor(self,col):
-        self.color = col
-    
-    def getColor(self):
-        return self.color
 
-class Graph:
-    
+    def get_neighbors(self):
+        return self.neighbors.keys()
+
+    def get_nweight(self,nnode):
+        return self.neighbors[nnode]
+
+class graph:
+
     def __init__(self):
-        self.vertList = {}
-        self.numVertices = 0
-    
-    def addVertices(self, key):
-        self.numVertices = self.numVertices + 1
-        newvertex = Vertex(key)        
-        self.vertList[key]= newvertex
-        return newvertex
-    
-    def getVertex(self, n):
-        if n in self.vertList:
-            return self.vertList[n]
-        else:
-            return None
-    
-    def __contains__ (self, n):
-        return n in self.vertList
-    
-    
-    def addEdge(self, head, tail, cost = 0):
-        if head not in self.vertList:
-            self.addVertices(head)
-        if tail not in self.vertList:
-            self.addVertices(tail)
-        self.vertList[head].addNeighbor(self.vertList[tail], cost)
-        
-    def getVertices(self):
-        return self.vertList.keys()
+        self.nodes ={}
+        self.n_total = 0
 
-    def __iter__(self):
-        return iter(self.vertList.values())
-        
-    def breadthfirst (g, startvertex):
-        currentvertex = g.getVertex(startvertex)
-        print currentvertex
-        currentq = Queue()
-        currentq.enqueue(currentvertex)
-        while currentq.size()>0:
-            currentvertex = currentq.dequeue()
-            neighborlist = currentvertex.getConnections()
-            for nbr in neighborlist:
-                print nbr
-                if nbr.getColor() == 'white':
-                    nbr.setColor ='gray'
-                    currentq.enqueue(nbr)
+    def add_node(self, _id):
+        newnode = node(_id)
+        self.nodes[_id] = newnode
+        self.n_total += 1
 
-    def depthfirst (self, startvertex, currentstack):
-        currentvertex = startvertex
-        print currentvertex
-        currentstack.append(currentvertex)
-        neighborlist = startvertex.getConnections()
-        done = False
-        if len(neighborlist) >0:
-            for nbr in neighborlist:
-                done = self.depthfirst(nbr,currentstack)
-        else:
-            currentstack.pop()
-            done = True
-            
-            
-        return done
+    def add_edge(self,from_node, to_node,weight=1):
 
+        if from_node not in self.nodes:
+            self.add_node(from_node)
 
+        if to_node not in self.nodes:
+            self.add_node(to_node)
 
-                     
-'''
-for i in range(6):
-    g.addVertices(i)
+        self.nodes[from_node].add_neighbor(self.nodes[to_node],weight)
 
-vertex = g.getVertices() 
-print vertex  
+    def get_nodes(self):
+        return self.nodes.keys()
 
+    def display_graph(self):
+        for node in self.nodes:
+            print self.nodes[node].get_id()
+            for nodes in self.nodes[node].get_neighbors():
+                print '-->' , nodes.get_id()
 
+    def bfs(self,root):
+        q = Queue.Queue() # FIFO
+        q.put(root)
+        while not q.empty():
+            currentnode = self.nodes[q.get()]
+            print currentnode.get_id()
+            for neighbors in currentnode.get_neighbors():
+                #print '--',neighbors.get_id()
+                q.put(neighbors.get_id())
 
-g.addEdge(0,1,500) 
-g.addEdge(0,5,200)
-g.addEdge(1,2,400)
-g.addEdge(2,3,900)
-g.addEdge(3,4,700)
-g.addEdge(3,5,300)
-g.addEdge(4,0,100)
-g.addEdge(5,4,800)
-g.addEdge(5,2,100)
-'''
+    def dfs(self,root):
+        q = Queue.LifoQueue()
+        q.put(root)
+        while not q.empty():
+            currentnode = self.nodes[q.get()]
+            print currentnode.get_id()
+            for neighbors in currentnode.get_neighbors():
+                #print '--',neighbors.get_id()
+                q.put(neighbors.get_id())
 
+    def prim(self):
+        q= Queue.PriorityQueue()
 
-g = Graph()
-g.addEdge('A','B',4)
-g.addEdge('A','H',8)
-g.addEdge('B','C',8)
-g.addEdge('B','H',11)
-g.addEdge('C','I',2)
-g.addEdge('C','F',4)
-g.addEdge('C','D',7)
-g.addEdge('D','E',9)
-g.addEdge('D','F',24)
-g.addEdge('E','F',10)
-g.addEdge('F','G',2)
-g.addEdge('G','I',6)
-g.addEdge('G','H',1)
+        for node in self.nodes:
+            for nbr in self.nodes[node].get_neighbors():
+                print node, nbr.get_id(), self.nodes[node].get_nweight(nbr)
+                q.put(self.nodes[node].get_nweight(nbr),str(node + nbr.get_id()))
+
+        while not q.empty():
+            print q.get()
 
 
 
 
 
-'''
-for vertices in g:
-   for neighbors in vertices.getConnections():
-       print ("( vertix is  %s, neighbor is %s, weight is %s)" % 
-       (vertices.getId(), neighbors.getId(), vertices.getweight(neighbors) ))
-'''
-print 'breadth first search is :'
-g.breadthfirst('A')
+## THIS is for dfs and bfs
+
+# newgraph = graph()
+# newgraph.add_edge('A','B')
+# newgraph.add_edge('A','C')
+# newgraph.add_edge('B','D')
+# newgraph.add_edge('B','E')
+# newgraph.add_edge('C','F')
+# newgraph.add_edge('C','G')
+# newgraph.add_edge('D','H')
+# newgraph.add_edge('D','I')
+#
+# print 'bfs'
+# newgraph.bfs('A')
+#
+# print 'dfs'
+# newgraph.dfs('A')
 
 
-print 'depth first search is :'
-stck = []
-startv = g.getVertex('A')
-g.depthfirst(startv,stck)
+## this is for prim's algorithm
+
+
+newgraph = graph()
+newgraph.add_edge('A','B',1)
+newgraph.add_edge('A','D',4)
+newgraph.add_edge('A','C',3)
+newgraph.add_edge('B','C',2)
+newgraph.add_edge('D','C',5)
+#newgraph.display_graph()
+
+newgraph.prim()
