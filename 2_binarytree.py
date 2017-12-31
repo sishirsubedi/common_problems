@@ -1,103 +1,482 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri May 20 22:25:50 2016
 
+@author: ibm-lenovo
+"""
 
-class BSTNode:
-    def __init__(self,parent, k):
-        self.key = k
-        self.parent = parent
-        self.left = None
-        self.right = None
+# Binary Search Tree in Python
 
-    def insert(self, node):
-        if node.key < self.key :
-            if self.left is None:
-                node.parent = self
-                self.left= node
+class Node:
+    def __init__(self, val):
+        self.value = val
+        self.leftChild = None
+        self.rightChild = None
+        self.parent = None
+        self.balancefactor=0
+  
+    def insert(self, data):
+        if self.value == data:
+            return False
+        elif self.value > data:
+            if self.leftChild:
+                return self.leftChild.insert(data)
             else:
-               self.left.insert(node)
+                newnode = Node(data)
+                self.leftChild = newnode
+                newnode.parent = self
+                self.updatebalance(self.leftChild)
+                return True
         else:
-            if self.right is None:
-                node.parent = self
-                self.right = node
+            if self.rightChild:
+                return self.rightChild.insert(data)
             else:
-                self.right.insert(node)
+                newnode = Node(data)
+                self.rightChild = newnode
+                newnode.parent = self
+                self.updatebalance(self.rightChild)
+                return True
 
-    def delete(self, k):
-        if k < self.key:
-            self.left.delete(k)
-        elif k > self.key:
-            self.right.delete(k)
+    def find(self, data):
+        if(self.value == data):
+            return True
+        elif self.value > data:
+            if self.leftChild:
+                return self.leftChild.find(data)
+            else:
+                return False
         else:
-            self.makedeletion()
+            if self.rightChild:
+                return self.rightChild.find(data)
+            else:
+                return False
 
-    def makedeletion(self):
+    def preorder(self):
+        if self:
+            print (str(self.value))
+            if self.leftChild:
+                self.leftChild.preorder()
+            if self.rightChild:
+                self.rightChild.preorder()
 
-        tempnode = None
+    def postorder(self):
+        if self:
+            if self.leftChild:
+                self.leftChild.postorder()
+            if self.rightChild:
+                self.rightChild.postorder()
+            print (str(self.value))
 
-        if self is None:
-            return
+    def inorder(self):
+        if self:
+            if self.leftChild:
+                self.leftChild.inorder()
+            print (str(self.value)) , self.balancefactor
+            if self.rightChild:
+                self.rightChild.inorder()
 
-        # only head or node is a leaf
-        elif self.right is None and self.left is None:
-          #  if self.parent.left == self:
-              #  self.parent.left =None
-                del self
-           # elif self.parent.right == self:
-             #   self.parent.right = None
-            #    del self
-
-        elif self.right  is None:
-            tempnode = self
-           # self.parent.right=self.left
-            self = self.left
-            del tempnode
-        elif self.left is None:
-            tempnode = self
-            self = self.right
-            del tempnode
-        else:
-            tempnode = self.right
-            while tempnode.left:
-                tempnode = tempnode.left
-            tempnode.left = self.left
-            tempnode = self  ## changing self to temp so that it can be deleted
-            self = self.right
-            del tempnode
-
-
-    def displaynode (self, node):
-        if (node):
-            #print node.key
-            node.displaynode (node.left)
-            print node.key
-            node.displaynode (node.right)
-            #print node.key
-
-class Binarytree:
+class Tree:
     def __init__(self):
         self.root = None
 
-    def insertNode(self,k):
-        node = BSTNode(None,k)
-        if self.root is None:
-            self.root = node
+    def insert(self, data):
+        if self.root:
+            return self.root.insert(data)
         else:
-            self.root.insert(node)
+            self.root = Node(data)
+            return True
 
-    def display(self):
-        self.root.displaynode(self.root)
+    def find(self, data):
+        if self.root:
+            return self.root.find(data)
+        else:
+            return False
 
-    def deleteNode(self,k):
-        self.root.delete(k)
+    def getRoot(self):
+        return self.root.value
+
+    def remove(self, data):
+        # empty tree
+        if self.root is None:
+            return False
+
+        # data is in root node
+        elif self.root.value == data:
+            if self.root.leftChild is None and self.root.rightChild is None:
+                self.root = None
+            elif self.root.leftChild and self.root.rightChild is None:
+                self.root = self.root.leftChild
+            elif self.root.leftChild is None and self.root.rightChild:
+                self.root = self.root.rightChild
+            elif self.root.leftChild and self.root.rightChild:
+                tempnode = self.root.rightChild
+                while tempnode.leftChild:
+                    tempnode = tempnode.leftChild
+
+                tempnode.leftChild = self.root.leftChild
+                self.root.leftChild.parent = tempnode
+                tempnode = self.root
+                self.root = self.root.rightChild
+                tempnode = None
+
+            return True
+
+        parent = None
+        node = self.root
+
+        # find node to remove
+        while node and node.value != data:
+            parent = node
+            if data < node.value:
+                node = node.leftChild
+            elif data > node.value:
+                node = node.rightChild
+
+        # case 1: data not found
+        if node is None or node.value != data:
+            return False
+
+        # case 2: remove-node has no children
+        elif node.leftChild is None and node.rightChild is None:
+            if data < parent.value:
+                parent.leftChild = None
+                node.parent = None
+            else:
+                parent.rightChild = None
+                node.parent = None
+            return True
+
+        # case 3: remove-node has left child only
+        elif node.leftChild and node.rightChild is None:
+            if data < parent.value:
+                parent.leftChild = node.leftChild
+                node.parent = None
+                node.leftChild = None
+            else:
+                parent.rightChild = node.leftChild
+                node.parent = None
+                node.leftChild = None
+            return True
+
+        # case 4: remove-node has right child only
+        elif node.leftChild is None and node.rightChild:
+            if data < parent.value:
+                parent.leftChild = node.rightChild
+                node.parent = None
+                node.rightChild = None
+            else:
+                parent.rightChild = node.rightChild
+                node.parent = None
+                node.rightChild = None
+            return True
+
+        # case 5: remove-node has left and right children
+        else:# we have parent and node , here node is the one that needs to be deleted
+            tempnodeparent = node.rightChild
+            tempnode = node.rightChild
+            while tempnode.leftChild:
+                tempnodeparent= tempnode
+                tempnode = tempnode.leftChild
+
+            tempnode.leftChild = node.leftChild
+            node.leftChild.parent = tempnode
+
+            if parent.value > node.value:
+                if tempnode.rightChild:
+                    tempnodeparent.leftChild = tempnode.rightChild
+                    tempnode.rightChild.parent = tempnodeparent
+
+                    tempnode.rightChild = node.rightChild
+                    node.rightChild.parent = tempnode
+
+                    parent.leftChild = tempnode
+                    tempnode.parent = parent
+
+                    node = None
+
+                else:
+                   parent.leftChild = tempnode
+                   tempnodeparent.parent = parent
+                   node = None
+            else:
+                if tempnode.rightChild:
+                    tempnodeparent.leftChild = tempnode.rightChild
+                    tempnode.rightChild.parent = tempnodeparent
+
+                    tempnode.rightChild = node.rightChild
+                    node.rightChild.parent = tempnode
+
+                    parent.rightChild = tempnode
+                    tempnode.parent = parent
+
+                    node = None
+                    
+                else: 
+                    parent.rightChild = tempnodeparent
+                    tempnodeparent.parent = parent
+                    node = None
+
+    def preorder(self):
+        if self.root is not None:
+            print("PreOrder")
+            self.root.preorder()
+        
+    def postorder(self):
+        if self.root is not None:
+            print("PostOrder")
+            self.root.postorder()
+
+    def inorder(self):
+        if self.root is not None:
+            print("InOrder")
+            self.root.inorder()
+            
+    def put(self,value):
+        if self.root:
+            self._put(value,self.root)
+        else:
+            self.root = Node(value)
+            
+    def _put(self, value, currentnode):
+        if value<currentnode.value:
+            if currentnode.leftChild :
+                self._put(value,currentnode.leftChild)
+            else:
+                currentnode.leftChild = Node(value)
+                currentnode.leftChild.parent = currentnode
+                self.updatebalance(currentnode.leftChild)
+        else:
+            if currentnode.rightChild:
+                self._put(value, currentnode.rightChild)
+            else:
+                currentnode.rightChild = Node(value)
+                currentnode.rightChild.parent = currentnode
+                self.updatebalance(currentnode.rightChild)
+                
+    def updatebalance(self, node):
+        if node.balancefactor > 1 or node.balancefactor < -1:
+            self.rebalancetree (node)
+            return
+        if node.parent != None:
+            if node.parent.leftChild == node:
+                node.parent.balancefactor += 1
+            elif node.parent.rightChild == node:
+                node.parent.balancefactor -= 1
+                
+            if node.parent.balancefactor != 0:
+                self.updatebalance(node.parent)
+        
+    
+    def rotateleft(self, node):
+        newnode = node.rightChild
+        node.rightChild = newnode.leftChild
+        if newnode.leftChild != None:
+            newnode.leftChild.parent = node
+        newnode.parent = node.parent
+        
+        if node == self.root:
+            self.root = newnode
+        else:
+            if node.parent.leftChild == node:
+                node.parent.leftChild = newnode
+            else:
+                node.parent.rightChild = newnode
+        newnode.leftChild = node
+        node.parent = newnode
+        node.balancefactor = node.balancefactor +1 - min(newnode.balancefactor,0)
+        newnode.balancefactor = newnode.balancefactor +1 + max (node.balancefactor,0)
+        
+        
+        
+    def rotateright(self, node):
+        newnode = node.leftChild
+        node.leftChild = newnode.rightChild
+        if newnode.rightChild != None:
+            newnode.rightChild.parent = node
+        newnode.parent = node.parent
+        
+        if node == self.root:
+            self.root = newnode
+        else:
+            if node.parent.leftChild == node:
+                node.parent.leftChild = newnode
+            else:
+                node.parent.rightChild = newnode
+        newnode.rightChild = node
+        node.parent = newnode
+        node.balancefactor = node.balancefactor -1 - max(newnode.balancefactor,0)
+        newnode.balancefactor = newnode.balancefactor -1 + min (node.balancefactor,0)
+    
+    def rebalancetree(self,node):
+       if node.balancefactor < 0:
+         if node.rightChild.balancefactor > 0:
+            self.rotateright(node.rightChild)
+            self.rotateleft(node)
+         else:
+            self.rotateleft(node)
+       elif node.balancefactor > 0:
+         if node.leftChild.balancefactor < 0:
+            self.rotateleft(node.leftChild)
+            self.rotateright(node)
+         else:
+            self.rotateright(node)
+        
+    
+        
+
+bst = Tree()
+
+'''
+bst.insert(5)
+bst.insert(8)
+bst.insert(3)
+bst.insert(12)
+bst.insert(7)
+bst.insert(9)
+bst.insert(15)
+bst.insert(1)
+bst.insert(20)
+bst.insert(8.5)
+bst.insert(11)
+bst.remove(9)
+
+bst.insert(17)
+bst.insert(5)
+bst.insert(35)
+bst.insert(2)
+bst.insert(11)
+bst.insert(29)
+bst.insert(38)
+bst.insert(9)
+bst.insert(16)
+bst.insert(7)
+bst.insert(8)
+bst.insert(37)
+bst.insert(36)
+bst.insert(36.5)
+bst.insert(40)
+
+bst.remove(17)
+
+'''
+
+bst.put(17)
+bst.put(5)
+bst.put(35)
+bst.put(2)
+bst.put(11)
+
+bst.put(9)
+bst.put(16)
 
 
-mytree = Binarytree()
-mytree.insertNode(5)
-mytree.insertNode(8)
-mytree.insertNode(3)
-mytree.insertNode(12)
-mytree.insertNode(7)
+#bst.remove(35)
 
-mytree.deleteNode(5)
+bst.inorder()
+print 'root is : ', bst.getRoot()
 
 
-mytree.display()
+
+
+
+# class BSTNode:
+#     def __init__(self,parent, k):
+#         self.key = k
+#         self.parent = parent
+#         self.left = None
+#         self.right = None
+
+#     def insert(self, node):
+#         if node.key < self.key :
+#             if self.left is None:
+#                 node.parent = self
+#                 self.left= node
+#             else:
+#                self.left.insert(node)
+#         else:
+#             if self.right is None:
+#                 node.parent = self
+#                 self.right = node
+#             else:
+#                 self.right.insert(node)
+
+#     def delete(self, k):
+#         if k < self.key:
+#             self.left.delete(k)
+#         elif k > self.key:
+#             self.right.delete(k)
+#         else:
+#             self.makedeletion()
+
+#     def makedeletion(self):
+
+#         tempnode = None
+
+#         if self is None:
+#             return
+
+#         # only head or node is a leaf
+#         elif self.right is None and self.left is None:
+#           #  if self.parent.left == self:
+#               #  self.parent.left =None
+#                 del self
+#            # elif self.parent.right == self:
+#              #   self.parent.right = None
+#             #    del self
+
+#         elif self.right  is None:
+#             tempnode = self
+#            # self.parent.right=self.left
+#             self = self.left
+#             del tempnode
+#         elif self.left is None:
+#             tempnode = self
+#             self = self.right
+#             del tempnode
+#         else:
+#             tempnode = self.right
+#             while tempnode.left:
+#                 tempnode = tempnode.left
+#             tempnode.left = self.left
+#             tempnode = self  ## changing self to temp so that it can be deleted
+#             self = self.right
+#             del tempnode
+
+
+#     def displaynode (self, node):
+#         if (node):
+#             #print node.key
+#             node.displaynode (node.left)
+#             print node.key
+#             node.displaynode (node.right)
+#             #print node.key
+
+# class Binarytree:
+#     def __init__(self):
+#         self.root = None
+
+#     def insertNode(self,k):
+#         node = BSTNode(None,k)
+#         if self.root is None:
+#             self.root = node
+#         else:
+#             self.root.insert(node)
+
+#     def display(self):
+#         self.root.displaynode(self.root)
+
+#     def deleteNode(self,k):
+#         self.root.delete(k)
+
+
+# mytree = Binarytree()
+# mytree.insertNode(5)
+# mytree.insertNode(8)
+# mytree.insertNode(3)
+# mytree.insertNode(12)
+# mytree.insertNode(7)
+
+# mytree.deleteNode(5)
+
+
+# mytree.display()
