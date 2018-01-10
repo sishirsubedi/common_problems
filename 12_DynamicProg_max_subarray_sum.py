@@ -1,14 +1,5 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu May 19 13:31:09 2016
 
-@author: ibm-lenovo
-"""
-
-
-import sys
-# MAXIMUM SUB ARRAY _ BruteForce
-
+# maximum subarray - brute force
 def maxsubarray(glist):
     sum = [glist[0],0,0]
     for i in range(0,len(glist)-1):
@@ -20,9 +11,23 @@ def maxsubarray(glist):
                 sum[1] = i
                 sum[2] = j 
     return sum
-    
-    
-    
+
+
+# maximum sum of array - brute force
+def maxsumofarray(glist):
+    sum = [glist[0], 0, 0]
+    for i in range(1, len(glist)):
+        for j in range(i,i+1 ):
+            temp = 0
+
+            temp += glist[j]
+            if (temp > sum[0]):
+                sum[0] = temp
+                sum[1] = i
+                sum[2] = j
+    return sum
+
+
 # MAXIMUM SUB ARRAY _ Dynamic
 
 def maxsubarray_dynamic(A, low, high):
@@ -66,15 +71,18 @@ def maxsubarray_crossing(A, low, mid, high):
 givenlist = [1,-3,2,-5,7,6,-1,-4,11,-23]  # 4 to 8 - 19
 givenlist2 = [-3,-2,-5,-7,-6,0,-4,-11,-23] # 5 to 5 - -1
 givenlist3 = [1,2,3,4,5,6,7,8,9] # 0 to 8 - 45
+
+givenlist = [-1,2,10,5,-3]
 sum = maxsubarray(givenlist)
+print sum
 
 
-
-sum1= maxsubarray_dynamic(givenlist,0,9)
-sum2= maxsubarray_dynamic(givenlist2,0,8)
-sum3= maxsubarray_dynamic(givenlist3,0,8)
-
-print sum, sum1, sum2, sum3
+#
+# sum1= maxsubarray_dynamic(givenlist,0,9)
+# sum2= maxsubarray_dynamic(givenlist2,0,8)
+# sum3= maxsubarray_dynamic(givenlist3,0,8)
+#
+# print sum, sum1, sum2, sum3
 
 
 
