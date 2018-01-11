@@ -34,6 +34,9 @@ class Vertex:
     def set_previous(self, prev):
         self.previous = prev
 
+    def get_previous(self):
+        return self.previous
+
     def set_visited(self):
         self.visited = True
 
@@ -87,7 +90,7 @@ def shortest(v, path):
 
 
 import heapq
-
+from pythonds.graphs import PriorityQueue
 
 def dijkstra(aGraph, start):
     print "Dijkstra's shortest path for ", start.get_id()
@@ -95,50 +98,84 @@ def dijkstra(aGraph, start):
     start.set_distance(0)
 
     # Put tuple pair into the priority queue
-    unvisited_queue = [(v.get_distance(), v) for v in aGraph]
-    heapq.heapify(unvisited_queue)
+    pq = [(v.get_distance(), v) for v in aGraph]
+    heapq.heapify(pq)
 
-    while len(unvisited_queue):
+    while len(pq):
         # Pops a vertex with the smallest distance
-        uv = heapq.heappop(unvisited_queue)
+        uv = heapq.heappop(pq)
         current = uv[1]
         current.set_visited()
 
         # for next in v.adjacent:
         for next in current.adjacent:
             # if visited, skip
-            if next.visited:
-                continue
+            # if next.visited:
+            #     continue
             new_dist = current.get_distance() + current.get_weight(next)
             if new_dist < next.get_distance():
                 next.set_distance(new_dist)
                 next.set_previous(current)
 
+def prims(aGraph, start):
+
+    mse =[]
+    print "prims from ", start.get_id()
+    start.set_distance(0)
+    pq = PriorityQueue()
+    pq.buildHeap([(v.get_distance(), v) for v in aGraph])
+
+    while not pq.isEmpty():
+        currentvertex = pq.delMin()
+        #print currentvertex
+
+        mse.append([currentvertex.get_id(),currentvertex.get_distance()])
+
+        currentvertex.set_visited()
+        for childvertex in currentvertex.adjacent:
+            #print childvertex.get_id()
+            newcost = currentvertex.get_weight(childvertex)
+            if childvertex in pq and newcost< childvertex.get_distance():
+                childvertex.set_distance(newcost)
+                childvertex.set_previous(currentvertex)
+                pq.decreaseKey(childvertex, newcost)
+
+    for i in mse:
+        print i
 
 
-if __name__ == '__main__':
-
-    g = Graph()
 
 
-    g.add_edge('a', 'b', 1)
-    g.add_edge('a', 'c', 2)
-    g.add_edge('c', 'e', 5)
-    g.add_edge('b', 'd', 7)
-    g.add_edge('b', 'e', 1)
-    g.add_edge('e', 'd', 1)
 
 
-    print 'Graph data:'
-    for v in g:
-        for w in v.get_connections():
-            vid = v.get_id()
-            wid = w.get_id()
-            print '( %s , %s, %3d)' % (vid, wid, v.get_weight(w))
-
-    dijkstra(g, g.get_vertex('a'))
-
-    for v in g:
-        print v.get_id(),v.get_distance()
 
 
+
+
+g = Graph()
+
+
+g.add_edge('a', 'b', 2)
+g.add_edge('a', 'c', 3)
+g.add_edge('c', 'f', 5)
+g.add_edge('f', 'g', 1)
+g.add_edge('b', 'e', 4)
+g.add_edge('b', 'd', 1)
+g.add_edge('b', 'c', 1)
+g.add_edge('d', 'e', 1)
+
+
+print 'Graph data:'
+for v in g:
+    for w in v.get_connections():
+        vid = v.get_id()
+        wid = w.get_id()
+        print '( %s , %s, %3d)' % (vid, wid, v.get_weight(w))
+
+# dijkstra(g, g.get_vertex('a'))
+#
+# for v in g:
+#     print v.get_id(),v.get_distance()
+
+
+prims(g, g.get_vertex('a'))
