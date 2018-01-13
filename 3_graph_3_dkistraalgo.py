@@ -143,15 +143,6 @@ def prims(aGraph, start):
     for i in mse:
         print i
 
-
-
-
-
-
-
-
-
-
 g = Graph()
 
 
@@ -172,10 +163,48 @@ for v in g:
         wid = w.get_id()
         print '( %s , %s, %3d)' % (vid, wid, v.get_weight(w))
 
-# dijkstra(g, g.get_vertex('a'))
-#
-# for v in g:
-#     print v.get_id(),v.get_distance()
-
-
 prims(g, g.get_vertex('a'))
+
+
+### floyd warshall algorithm for all vertex shortest path
+
+from pythonds.graphs import Graph, Vertex
+
+
+def floyd_Warshall(aGraph):
+    distmat = [[100 for x in range(0,aGraph.numVertices+1)] for y in range(0,aGraph.numVertices+1)]
+
+    for row in distmat:
+        print row
+
+    for num in range(0,aGraph.numVertices+1):
+        distmat[num][num] = 0
+
+    for v1 in aGraph.getVertices():
+        currentvertex = aGraph.getVertex(v1)
+        for childvertex in currentvertex.getConnections():
+            print currentvertex.getWeight(childvertex)
+            print int(v1), int(childvertex.getId())
+            distmat[int(v1)][int(childvertex.getId())] = currentvertex.getWeight(childvertex)
+
+    numofvertices = aGraph.numVertices+1
+
+    for k in range(1,numofvertices):
+        for i in range(1, numofvertices):
+            for j in range(1, numofvertices):
+                if distmat[i][j] > distmat[i][k]+ distmat[k][j]:
+                    distmat[i][j] = distmat[i][k] + distmat[k][j]
+
+    print 'floydwarshall result is : '
+    for row in distmat:
+        print row
+
+
+
+newGraph = Graph()
+newGraph.addEdge('1','3',-2)
+newGraph.addEdge('3','4',2)
+newGraph.addEdge('2','1',4)
+newGraph.addEdge('2','3',3)
+newGraph.addEdge('4','2',-1)
+floyd_Warshall(newGraph)
